@@ -6,6 +6,7 @@ __author__="wanglongfei"
 import turtle
 '''
     完成一个分形树的绘制
+    使用递归函数
 '''
 
 class Pentagram():
@@ -30,6 +31,38 @@ class Pentagram():
             turtle.forward(size)
             turtle.right(144)
         #turtle.exitonclick()
+    def draw_recursive_pentagram(self,size):
+        '''
+        迭代绘制五角星
+        :param size:
+        :return:
+        '''
+        count=1
+        while(count<=5):
+            turtle.forward(size)
+            turtle.right(144)
+            count=count+1
+
+        size=size+10
+        if(size<=100):
+            self.draw_recursive_pentagram(size)
+    def fractal_tree(self,branch_length):
+        '''
+        绘制分形树的函数
+        :param branch_length:
+        :return:
+        '''
+        if(branch_length>3):
+            turtle.forward(branch_length)
+            turtle.right(20)
+            self.fractal_tree(branch_length-8)
+            # 准备绘制左侧树
+            turtle.left(40)
+            self.fractal_tree(branch_length-8)
+            # 返回
+            turtle.right(20)
+            turtle.backward(branch_length)
+
 
 '''
     turtle.penup() 抬起画笔，之后移动画笔不绘制图形
@@ -45,13 +78,16 @@ if(__name__=="__main__"):
     p.pentagon(150)
     size=50
     turtle.penup()
+    turtle.left(90)
     turtle.backward(200)
     turtle.pendown()
-    turtle.pensize(2)
+    turtle.pensize(1)
     turtle.pencolor("red")
 
-    while(size<=100):
-        p.pentagon(size)
-        # size = size + 10
-        size+=10
+    # while(size<=100):
+    #     p.pentagon(size)
+    #     # size = size + 10
+    #     size+=10
+    # p.draw_recursive_pentagram(50)
+    p.fractal_tree(150)
     turtle.exitonclick()
