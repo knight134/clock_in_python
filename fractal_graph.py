@@ -53,15 +53,23 @@ class Pentagram():
         :return:
         '''
         if(branch_length>3):
+            if(branch_length<30):
+                turtle.pencolor("green")
+                turtle.pensize(1)
+            else:
+                turtle.pensize(2)
+                turtle.pencolor("black")
             turtle.forward(branch_length)
             turtle.right(20)
-            self.fractal_tree(branch_length-8)
+            self.fractal_tree(branch_length-18)
             # 准备绘制左侧树
             turtle.left(40)
-            self.fractal_tree(branch_length-8)
+            self.fractal_tree(branch_length-18)
             # 返回
             turtle.right(20)
+            turtle.penup()
             turtle.backward(branch_length)
+            turtle.pendown()
 
 
 '''
@@ -79,7 +87,7 @@ if(__name__=="__main__"):
     size=50
     turtle.penup()
     turtle.left(90)
-    turtle.backward(200)
+    turtle.backward(400)
     turtle.pendown()
     turtle.pensize(1)
     turtle.pencolor("red")
@@ -89,5 +97,6 @@ if(__name__=="__main__"):
     #     # size = size + 10
     #     size+=10
     # p.draw_recursive_pentagram(50)
+    turtle.speed(0)
     p.fractal_tree(150)
     turtle.exitonclick()
