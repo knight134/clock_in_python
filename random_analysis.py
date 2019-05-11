@@ -5,6 +5,7 @@
 '''
 import random
 import matplotlib.pyplot as plt
+import numpy as np
 plt.rcParams['font.sans-serif']=['SimHei']
 plt.rcParams['axes.unicode_minus']=False
 
@@ -40,6 +41,10 @@ def main():
     for (i,result) in enumerate(result_list):
         print("点数："+str(i+1)+"\t次数："+str(result)+"\t频率："+str(result/total_times))
     '''
+    roll_list1=np.random.randint(1,6,total_times)
+    roll_list2=np.random.randint(1,6,total_times)
+    roll_sum=roll_list1+roll_list2
+
     x=range(1,total_times+1)
     plt.scatter(x,roll_list1,alpha=0.4,c="red")
     plt.scatter(x,roll_list2,alpha=0.4,c="green")
@@ -51,6 +56,10 @@ def main():
     plt.xlabel("点数")
     plt.ylabel("频率")
     plt.show()
+    # 科学计算库 numpy
+    (hist,bins)=np.histogram(roll_sum,bins=range(2,14))
+    print(hist)
+    print(bins)
     for i,result in roll_dict.items():
         print("点数：" + str(i) + "\t次数：" + str(result) + "\t频率：" + str(result / total_times))
 if(__name__=="__main__"):
