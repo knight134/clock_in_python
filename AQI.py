@@ -6,10 +6,12 @@ __author__="knight"
 
 import sys
 import json
-
+import requests
+from bs4 import BeautifulSoup
 '''
     空气质量指数 (AQI air quality index)
     各指标线性缩放然后取最大值
+    从网站pm25.in实时获取数据
 '''
 '''
     json操作
@@ -63,9 +65,38 @@ class AQI():
         fout=open(outfile,"w",encoding="utf8")
         json.dump(obj,fout,ensure_ascii=False)
         fout.close()
+class Spider():
+    def __init__(self):
+        self.url=""
+    def run(self):
+        city=input("请输入城市拼音：")
+        self.url="http://pm25.in/"+city
+        url_text=self.get_html_text()
+        #print(url_text)
+        aqi=self.get_aqi(url_text)
+        print(aqi)
+    def get_html_text(self):
+        r=requests.get(self.url,timeout=30)
+        #print(r.status_code)
+        return r.text
+    def get_aqi(self,text):
+        b=BeautifulSoup(text,"lxml")
+        div_list=b.find_all('div',{'class':'span1'})
+        info=[]
+        for i in range(8):
+            div_content=div_list[i]
+            caption=div_content.find('div',{'class':'caption'}).text.strip()
+            value=div_content.find('div',{'class':'value'}).text.strip()
+            info.append((caption,value))
+        return info
+
 if(__name__=="__main__"):
     a=AQI()
+    '''
     aqi=a.test_data()
     aqi.sort(key=lambda city:city['aqi'],reverse=True)
     print(aqi)
     AQI.write_data(aqi,"aqi_out.json")
+    '''
+    s=Spider()
+    s.run()

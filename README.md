@@ -25,4 +25,19 @@
 * os.path.isdir()
 * os.path.join()
 * os.path.splitext()	将文件分割成文件名与扩展名，如分割tmp.txt为tmp和.txt
+---
+### requests 模块
+* get()	对应http的GET方式
+* post()	对应http的POST方式，用于传递用户数据
+
+* status_code	http请求的返回状态码，200 - 连接成功，400 - 连接失败。比如有名的404
+* text	url对应的字符串内容
+	http://docs.python-requests.org/
+---
+### beautifulsoup4解析网页
+* import bs4
+* 创建beautifulsoup对象
+* find	找到第一个满足条件的节点
+* find_all	找到所有满足条件的节点
+* bs=BeautifulSoup(url,html_parser,encoding)
 
