@@ -40,4 +40,16 @@
 * find	找到第一个满足条件的节点
 * find_all	找到所有满足条件的节点
 * bs=BeautifulSoup(url,html_parser,encoding)
+---
+### Pandas数据分析模块
+* Pandas基于NumPy，提供高性能矩阵运算
+* 绘图功能基于matplotlib. https://pandas.pydata.org/pandas-docs/stable/visualization.html
+* import pandas as pd
+* Series	类似于一维数组
+* DataFrame	多维数组/表格数据
+* pd.read_csv(f)	读
+* pd.to_csv(o)	写
+* skipna()	跳过缺失值
+* dropna()	丢掉缺失值
+
 
